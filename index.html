@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guessing Game</title>
+  <style>
+    body { font-family: Arial; background: #eef; text-align: center; padding: 30px; }
+    button { padding: 10px 20px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Welcome to the Guessing Game!</h1>
+  <p>Guess the number between 1 and 10</p>
+  <div id="output"></div>
+
+  <script>
+    function playGame() {
+      let playAgain = true;
+
+      while (playAgain) {
+        const randomNumber = Math.floor(Math.random() * 10) + 1;
+        let guess;
+        let attempts = 0;
+
+        while (true) {
+          guess = prompt("Guess a number between 1 and 10:");
+          if (guess === null) break;
+          guess = parseInt(guess);
+          attempts++;
+
+          if (isNaN(guess) || guess < 1 || guess > 10) {
+            alert("Please enter a valid number between 1 and 10.");
+            continue;
+          }
+
+          if (guess > randomNumber) {
+            alert("Too high! Try again.");
+          } else if (guess < randomNumber) {
+            alert("Too low! Try again.");
+          } else {
+            alert(`Correct! You guessed the number in ${attempts} attempts.`);
+            break;
+          }
+        }
+
+        let again = prompt("Would you like to play again? (yes/no)").toLowerCase();
+        if (again !== "yes") {
+          playAgain = false;
+          document.getElementById("output").innerHTML = "Thanks for playing!";
+        }
+      }
+    }
+
+    playGame();
+  </script>
+</body>
+</html>
